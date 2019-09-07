@@ -2,9 +2,10 @@
 
 namespace App;
 
-use App\Facades\TicketCode;
+
 use App\Concert;
 use Carbon\Carbon;
+use App\Facades\TicketCode;
 use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
@@ -12,7 +13,7 @@ class Ticket extends Model
     protected $guarded = [];
     
     public function claimFor($order) {
-        $this->code = TicketCode.generate();
+        $this->code = TicketCode.generateFor();
         $order->tickets()->save($this);
     }
 
