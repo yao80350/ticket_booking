@@ -1,11 +1,14 @@
 .ticket {
     max-width: 40%;
-    padding: 1rem 1.5rem;
-
-    &_info {
+    
+    &__container {
+        padding: 1rem 1.5rem;
         border-bottom: $line;
+    }
 
-        &_item {
+    &__info {
+
+        &__item {
             margin-bottom: 1.5rem;
 
             img {

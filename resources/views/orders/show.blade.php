@@ -1,42 +1,43 @@
 @extends('layouts.master')
 @section('body')
-	<div class="bg-soft">
-	    <div class="order-box">
-	    	<header class="header order-border-bottom">
-				<h1 class="order-summary">Order Summary</h1>
-				<span class="comfirmation-num">{{ $order->confirmation_number }}</span>
+	<div class="container order-box">
+	    <div class="order">
+	    	<header class="heading-primary order__header">
+				<h1 class="heading-primary--main order__summary">Order Summary</h1>
+				<span class="heading-primary--sub order__confirmation-num">{{ $order->confirmation_number }}</span>
 			</header>
-			<div class="order-desc order-border-bottom">
-				<h2 class="order-total">Order Total: ${{ number_format($order->amount / 100, 2) }}</h2>
-				<h3 class="order-card">Billed to Card #: **** **** **** {{ $order->card_last_four }}</h3>
+			<div class="order__desc">
+				<p class="order__total">Order Total: ${{ number_format($order->amount / 100, 2) }}</p>
+				<p class="order__card">Billed to Card #: **** **** **** {{ $order->card_last_four }}</p>
 			</div>
-		<div class="tickets-box">
-			<h4 class="tickets-title">Your tickets</h4>
+		</div>
+		<div class="ticket-cards">
+			<h4 class="ticket-cards__title">Your tickets</h4>
 
 			@foreach($order->tickets as $ticket)
-			<div class="ticket-box">
-				<div class="ticket-title-box">
-					<h4 class="ticket-title">
-						<span class="ticket-title-main">{{ $ticket->concert->title }}</span>
-						<span class="ticket-title-sub">{{ $ticket->concert->subtitle }}</span>
+			<div class="ticket-card">
+				<div class="ticket-card__title-box">
+					<h4 class="ticket-card__title">
+						<span class="ticket-card__title--main">{{ $ticket->concert->title }}</span>
+						<span class="ticket-card__title--sub">{{ $ticket->concert->subtitle }}</span>
 					</h4>
-					<p class="admission-box">
-						<span class="admission-title">General Admission</span>
-						<span class="admission">Admit one</span>
+					<p class="ticket-card__admission">
+						<span class="ticket-card__admission--main">General Admission</span>
+						<span class="ticket-card__admission--sub">Admit one</span>
 					</p>
 				</div>
-				<div class="ticket-detail-box order-border-bottom">
-					<div class="ticket-detail-wrapper">
-						<img class="ticket-icon" src='{{ asset("images/calendar_active.svg") }}' alt="calendar icon">
-						<p class="ticket-datetime">
+				<div class="ticket-card__detail-box">
+					<div class="ticket-card__detail">
+						<img src='{{ asset("images/calendar_active.svg") }}' alt="calendar icon">
+						<p class="ticket-time">
 							<time datetime="{{ $ticket->concert->date->format('Y-m-d H:i') }}">
-								<span class="bold">{{ $ticket->concert->date->format('l, F jS, Y') }}</span>
+								<span>{{ $ticket->concert->date->format('l, F jS, Y') }}</span>
 							</time>
 							<span>{{ $ticket->concert->date->format('g:ia') }}</span>
 						</p>
 					</div>
-					<div class="ticket-detail-wrapper">
-						<img class="ticket-icon" src='{{ asset("images/location_active.svg") }}' alt="map icon">
+					<div class="ticket-card__detail">
+						<img src='{{ asset("images/location_active.svg") }}' alt="map icon">
 						<p class="ticket-address">
 							<span class="bold">{{ $ticket->concert->venue }}</span>
 							<span>{{ $ticket->concert->venue_address }}</span>
@@ -44,13 +45,12 @@
 						</p>
 					</div>
 				</div>
-				<div class="ticket-extra-info-box">
+				<div class="ticket-card__note-box">
 					<span class="ticket-code">{{ $ticket->code }}</span>
 					<span class="ticket-email">{{ $order->email }}</span>
 				</div>
 			</div>
 			@endforeach
-		</div>								
-		</div>		
+		</div>										
 	</div>	
 @endsection

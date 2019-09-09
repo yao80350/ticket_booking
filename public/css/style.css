@@ -83,7 +83,7 @@ button {
       margin: 0; } }
 
 body {
-  font-family: "Lato", Helvetica, Arial, Sans-Serif;
+  font-family: Helvetica, Arial, Sans-Serif;
   font-weight: 400;
   line-height: 1.6;
   color: #777; }
@@ -166,18 +166,43 @@ body {
     box-shadow: none; } }
 
 .ticket {
-  max-width: 40%;
-  padding: 1rem 1.5rem; }
-  .ticket_info {
+  max-width: 40%; }
+  .ticket__container {
+    padding: 1rem 1.5rem;
     border-bottom: 1px solid #f4f2f2; }
-    .ticket_info_item {
-      margin-bottom: 1.5rem; }
-      .ticket_info_item img {
-        width: 1.2rem;
-        vertical-align: middle;
-        margin-right: .5rem; }
-      .ticket_info_item span {
-        color: #333;
-        vertical-align: middle; }
-      .ticket_info_item p {
-        margin-left: 1.7rem; }
+  .ticket__info__item {
+    margin-bottom: 1.5rem; }
+    .ticket__info__item img {
+      width: 1.2rem;
+      vertical-align: middle;
+      margin-right: .5rem; }
+    .ticket__info__item span {
+      color: #333;
+      vertical-align: middle; }
+    .ticket__info__item p {
+      margin-left: 1.7rem; }
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem 1.5rem; }
+  .form__group {
+    flex-basis: 50%; }
+  .form__label {
+    color: #333;
+    display: block;
+    font-size: .8rem;
+    font-weight: 700; }
+  .form__control {
+    display: block;
+    width: 100%;
+    padding: .5rem .75rem;
+    background-color: #fff;
+    line-height: 1.25;
+    border: 1px solid #f4f2f2; }
+    .form__control--static {
+      background-color: transparent;
+      border: none; }
+
+.cta {
+  background-color: #fff; }

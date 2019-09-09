@@ -1,0 +1,36 @@
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+
+    &__group {
+        flex-basis: 50%;
+    }
+
+    &__label {
+        color: $color-grey-dark-1;
+        display: block;
+        font-size: .8rem;
+        font-weight: 700;            
+    }
+
+    &__control {
+        display: block;
+        width: 100%;
+        padding: .5rem .75rem;
+        background-color: #fff;
+        line-height: 1.25;
+        border: $line;
+
+        &--static {
+            background-color: transparent;
+            border: none;
+            padding: .5rem 0;
+        }
+    }
+
+    &__btn {
+        margin-top: 2rem;
+    }
+}
