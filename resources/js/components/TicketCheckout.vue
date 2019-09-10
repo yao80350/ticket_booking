@@ -40,7 +40,7 @@ export default {
             if (this.quantity > 1) {
                 return `${this.quantity} tickets to ${this.concertTitle}`;
             }
-            return `One ticket to ${this.convertTitle}`
+            return `One ticket to ${this.concertTitle}`
         },
         totalPrice() {
             return this.quantity * this.price
@@ -63,7 +63,6 @@ export default {
             return handler;
         },
         openStripe() {
-            console.log("a")
             const data = {
                 name: 'Ticket Booking',
                 allowRememberMe: false,
@@ -79,12 +78,12 @@ export default {
         },
         purchaseTickets(token) {
             this.processing = true;
-            axios.post(`${this.rootUrl}/concerts/${this.convertId}/orders`, {
+            axios.post(`${this.rootUrl}/concerts/${this.concertId}/orders`, {
                 email: token.email,
 			    ticket_quantity: this.quantity,
 			    payment_token: token.id
             }).then(response => {
-			    window.olcation = `${this.rootUrl}/orders/${response.data.onfirmation_number}`;
+			    window.location = `${this.rootUrl}/orders/${response.data.confirmation_number}`;
 
             }).catch(response => {
                 this.processing = false;

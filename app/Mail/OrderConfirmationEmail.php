@@ -30,6 +30,8 @@ class OrderConfirmationEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('emails.order-confirmation-email')
+            ->subject("Your Ticket Order")
+            ->from(config("mail.username"));
     }
 }

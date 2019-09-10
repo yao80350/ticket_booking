@@ -1876,7 +1876,7 @@ __webpack_require__.r(__webpack_exports__);
         return "".concat(this.quantity, " tickets to ").concat(this.concertTitle);
       }
 
-      return "One ticket to ".concat(this.convertTitle);
+      return "One ticket to ".concat(this.concertTitle);
     },
     totalPrice: function totalPrice() {
       return this.quantity * this.price;
@@ -1899,7 +1899,6 @@ __webpack_require__.r(__webpack_exports__);
       return handler;
     },
     openStripe: function openStripe() {
-      console.log("a");
       var data = {
         name: 'Ticket Booking',
         allowRememberMe: false,
@@ -1916,12 +1915,12 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.processing = true;
-      axios.post("".concat(this.rootUrl, "/concerts/").concat(this.convertId, "/orders"), {
+      axios.post("".concat(this.rootUrl, "/concerts/").concat(this.concertId, "/orders"), {
         email: token.email,
         ticket_quantity: this.quantity,
         payment_token: token.id
       }).then(function (response) {
-        window.olcation = "".concat(_this.rootUrl, "/orders/").concat(response.data.onfirmation_number);
+        window.location = "".concat(_this.rootUrl, "/orders/").concat(response.data.confirmation_number);
       })["catch"](function (response) {
         _this.processing = false;
       });
