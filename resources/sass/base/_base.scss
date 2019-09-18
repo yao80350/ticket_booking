@@ -20,10 +20,7 @@ html {
 
 body {
 	box-sizing: border-box;
-	background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
-	background-repeat: no-repeat;
 	min-height: 100vh;
-	padding: 3rem 0;
 }
 
 ul {
@@ -35,8 +32,8 @@ a {
 	text-decoration: none;
 }
 
-input {
-	font-display: inherit;
+input, textarea, optgroup, select {
+	font-family: inherit;
 	font-size: 16px;
 	color: inherit;
 	border: none;
@@ -46,22 +43,34 @@ input {
 	}
 }
 
+textarea {
+	overflow: auto;
+}
+
 button {
 	border: none;
+	cursor: pointer;
 	
 	&:focus {
 		outline: none;
 	}
 }
 
+h1, h2, h3 {
+	font-weight: normal;
+}
+
 .container {
-    max-width: 75rem;
-    margin: 0 auto;
-    background-color : $color-grey-light-1;
-    box-shadow: $shadow-dark;
+    max-width: $container-width;
+	margin: 0 auto;
+	padding: 0 1rem;
 
     @include respond(extra-large) {
         max-width: 100%;
         margin: 0;
     }
+}
+
+.clearfix {
+	@include clearfix;
 }

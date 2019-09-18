@@ -28,19 +28,22 @@
 				</div>
 				<div class="ticket-card__detail-box">
 					<div class="ticket-card__detail">
-						<img src='{{ asset("images/calendar_active.svg") }}' alt="calendar icon">
+						<svg class="ticket-card__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M1 3.995C1 2.893 1.893 2 2.995 2h14.01C18.107 2 19 2.893 19 3.995v14.01A1.995 1.995 0 0 1 17.005 20H2.995A1.995 1.995 0 0 1 1 18.005V3.995zM3 6h14v12H3V6zm2-6h2v2H5V0zm8 0h2v2h-2V0zM5 9h2v2H5V9zm0 4h2v2H5v-2zm4-4h2v2H9V9zm0 4h2v2H9v-2zm4-4h2v2h-2V9zm0 4h2v2h-2v-2z" fill-rule="evenodd"/></svg>
+
 						<p class="ticket-time">
 							<time datetime="{{ $ticket->concert->date->format('Y-m-d H:i') }}">
-								<span>{{ $ticket->concert->date->format('l, F jS, Y') }}</span>
+								<span class="bold">{{ $ticket->concert->date->format('l, F jS, Y') }}</span>
 							</time>
+							<br>
 							<span>{{ $ticket->concert->date->format('g:ia') }}</span>
 						</p>
 					</div>
 					<div class="ticket-card__detail">
-						<img src='{{ asset("images/location_active.svg") }}' alt="map icon">
+						<svg class="ticket-card__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20s7-9.134 7-13A7 7 0 0 0 3 7c0 3.866 7 13 7 13zm0-11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" fill-rule="evenodd"/></svg>
+
 						<p class="ticket-address">
-							<span class="bold">{{ $ticket->concert->venue }}</span>
-							<span>{{ $ticket->concert->venue_address }}</span>
+							<span class="bold">{{ $ticket->concert->venue }}</span><br>
+							<span>{{ $ticket->concert->venue_address }}</span><br>
 							<span>{{ $ticket->concert->city }}, {{ $ticket->concert->state }} {{ $ticket->concert->zip }}</span>
 						</p>
 					</div>

@@ -1,9 +1,9 @@
 .ticket-card {
     margin-bottom: 1.5rem;
     border: $line;
-    background-color: $color-grey-light-3;
+    background-color: $color-white;
     &__title-box {
-        background-color: $color-grey-dark-1;
+        background-color: $color-secondary;
         color: $color-white;
         display: flex;
         justify-content: space-between;
@@ -23,26 +23,49 @@
         }
 
         &--sub {
-            color: $color-grey-light-4;
+            color: $color-grey-light-2;
             font-weight: 400;
         }
     }
 
     &__admission {
+        text-align: right;
+
         &--main {
             font-weight: 700;
+        }
+
+        &--sub {
+            color: $color-grey-light-2;
         }
     }
 
     &__detail-box {
         display: flex;
-        justify-content: space-between;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid $color-grey-light-2;
     }
 
     &__detail {
-
-        img {
-            width: 1.25rem;
-        }
+        display: flex;
+        width: 50%;
     }
+
+    &__icon {
+        height: 1.5rem;
+        fill: $color-primary;
+        padding-right: .8rem;
+    }
+
+    &__note-box {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+        color: $color-grey-dark-1;
+    }
+}
+
+.bold {
+    font-weight: bold;
+    color: #000;
 }
