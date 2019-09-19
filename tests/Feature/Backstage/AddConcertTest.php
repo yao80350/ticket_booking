@@ -34,6 +34,8 @@ class AddConcertTest extends TestCase
             'ticket_quantity' => '75'
         ]);
 
+        var_dump($response);
+
         tap(Concert::first(), function ($concert) use ($response) {
             $response->assertStatus(302);
             $response->assertRedirect("/concerts/{$concert->id}");
