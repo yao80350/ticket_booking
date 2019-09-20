@@ -3,6 +3,7 @@
 @section('body')
 <main class="container">
     <h2>Published</h2>
+    @foreach($concerts as $concert)
     <div>
         <h3>{{ $concert->title }}</h3>
         <p>{{ $concert->subtitle }}</p>
@@ -19,5 +20,6 @@
             <a class="btn" href="">Public Link</a>
         </div>
     </div>
+    @endforeach
 </main>
 @endsection
