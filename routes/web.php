@@ -14,9 +14,10 @@ Route::get('/invitations/{code}', 'InvitationsController@show');
 Route::post('/register', 'Auth\RegisterController@register')->name('auth.register');
 
 Route::group(['middleware' => 'auth', 'prefix' => 'backstage', 'namespace' => 'Backstage'], function() {
-    Route::get('/concerts/new', 'ConcertsController@create');
+    Route::get('/concerts/new', 'ConcertsController@create')->name('backstage.concerts.new');
     Route::get('/concerts', 'ConcertsController@index');
     Route::post('/concerts', 'ConcertsController@store');
+    Route::get('/concerts/{id}/edit', 'ConcertsController@edit')->name('backstage.concerts.edit');
 });
 
 

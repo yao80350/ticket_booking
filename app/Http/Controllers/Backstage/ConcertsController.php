@@ -52,7 +52,18 @@ class ConcertsController extends Controller
 
         $concert->publish();
 
-        return $concert;
+        //return $concert;
         return redirect()->route('concerts.show', $concert);
+    }
+
+    public function edit($id) 
+    {
+        $concert = Auth::user()->concerts()->findOrFail($id);
+
+        abort_if($concert->isPublished(), 403);
+
+        return view('backstage.concerts.edit', [
+            'concert' => $concert
+        ]);
     }
 }

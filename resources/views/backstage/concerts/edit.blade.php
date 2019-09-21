@@ -4,13 +4,14 @@
 <div class="flex-fit">
     <div class="add-concert">
         <div class="container">
-            <h1>Add a concert</h1>
+            <h1>Edit a concert</h1>
         </div>
     </div>
     
-    <form action="{{ url('backstage/concerts') }}" method="POST" class="form create-form" enctype="multipart/form-data">
+    <form action="#" method="POST" class="form create-form" enctype="multipart/form-data">
         {{ csrf_field() }}
-        
+        {{ method_field('patch') }}
+
         @if ($errors->any())
         <div class="container mg-bottom-sm">
             <div class="alert alert--danger">
@@ -36,15 +37,15 @@
                 <div class="form-card">
                     <div class="form__group mg-bottom-sm {{ $errors->first('title', 'has-error') }}">
                         <label for="" class="form__label">Title</label>
-                        <input class="form__control" type="text" name="title" value="{{ old('title') }}" placeholder="The Headliners">
+                        <input class="form__control" type="text" name="title" value="{{ old('title', $concert->title) }}" placeholder="The Headliners">
                     </div>
                     <div class="form__group mg-bottom-sm {{ $errors->first('subtitle', 'has-error') }}">
                         <label for="" class="form__label">Subtitle</label>
-                        <input class="form__control" type="text" name="subtitle" value="{{ old('subtitle') }}" placeholder="with The Openers (optional)">
+                        <input class="form__control" type="text" name="subtitle" value="{{ old('subtitle', $concert->subtitle) }}" placeholder="with The Openers (optional)">
                     </div>
                     <div class="form__group mg-bottom-sm {{ $errors->first('additional_information', 'has-error') }}">
                         <label for="" class="form__label">Additional Information</label>
-                        <textarea  class="form__control" rows="4" name="additional_information" value="{{ old('additional_information') }}" placeholder="This concert is 19+ (optional)">
+                        <textarea  class="form__control" rows="4" name="additional_information" value="{{ old('additional_information', $concert->additional_information) }}" placeholder="This concert is 19+ (optional)">
                         </textarea>
                     </div>
                 </div>
@@ -60,11 +61,11 @@
                 <div class="form-card flex-list">
                     <div class="form__group mg-bottom-sm {{ $errors->first('title', 'has-error') }}">
                         <label for="" class="form__label">Date</label>
-                        <input class="form__control" type="date" name="date" value="{{ old('date') }}" placeholder="yyyy-mm-dd">
+                        <input class="form__control" type="date" name="date" value="{{ old('date', $concert->date->format('Y-m-d')) }}" placeholder="yyyy-mm-dd">
                     </div>
-                    <div class="form__group mg-bottom-sm {{ $errors->first('subtitle', 'has-error') }}">
+                    <div class="form__group mg-bottom-sm {{ $errors->first('time', 'has-error') }}">
                         <label for="" class="form__label">Start Time</label>
-                        <input class="form__control" type="text" name="time" value="{{ old('item') }}" placeholder="7:00pm">
+                        <input class="form__control" type="text" name="time" value="{{ old('time', $concert->date->format('g:ia')) }}" placeholder="7:00pm">
                     </div>
                 </div>
             </div>
@@ -81,24 +82,24 @@
                 <div class="form-card">
                     <div class="form__group mg-bottom-sm {{ $errors->first('venue', 'has-error') }}">
                         <label for="" class="form__label">Venue Name</label>
-                        <input class="form__control" type="text" name="venue" value="{{ old('venue') }}" placeholder="The Mosh Pit">
+                        <input class="form__control" type="text" name="venue" value="{{ old('venue', $concert->venue) }}" placeholder="The Mosh Pit">
                     </div>
-                    <div class="form__group mg-bottom-sm {{ $errors->first('subtitle', 'has-error') }}">
+                    <div class="form__group mg-bottom-sm {{ $errors->first('venue_address', 'has-error') }}">
                         <label for="" class="form__label">Street Address</label>
-                        <input class="form__control" type="text" name="venue_address" value="{{ old('venue_address') }}" placeholder="500 Example Ave.">
+                        <input class="form__control" type="text" name="venue_address" value="{{ old('venue_address', $concert->venue_address) }}" placeholder="500 Example Ave.">
                     </div>
                     <div class="flex-list">
                         <div class="form__group item--4 mg-bottom-sm {{ $errors->first('city', 'has-error') }}">
                             <label for="" class="form__label">City</label>
-                            <input class="form__control" type="text" name="city" value="{{ old('city') }}" placeholder="Laraville">
+                            <input class="form__control" type="text" name="city" value="{{ old('city', $concert->city) }}" placeholder="Laraville">
                         </div>
                         <div class="form__group item--4 mg-bottom-sm {{ $errors->first('state', 'has-error') }}">
                             <label for="" class="form__label">State/Province</label>
-                            <input class="form__control" type="text" name="state" value="{{ old('state') }}" placeholder="ON">
+                            <input class="form__control" type="text" name="state" value="{{ old('state', $concert->state) }}" placeholder="ON">
                         </div>
                         <div class="form__group item--4 mg-bottom-sm {{ $errors->first('zip', 'has-error') }}">
                             <label for="" class="form__label">ZIP</label>
-                            <input class="form__control" type="text" name="zip" value="{{ old('zip') }}" placeholder="90210">
+                            <input class="form__control" type="text" name="zip" value="{{ old('zip', $concert->zip) }}" placeholder="90210">
                         </div>
                     </div>
                 </div>
@@ -119,23 +120,19 @@
                             <label for="" class="form__label">Price</label>
                             <div class="input-group">
                                 <span class="input-group__addon">$</span>
-                                <input class="form__control" type="text" name="ticket_price" value="{{ old('ticket_price') }}" placeholder="0.00">
+                                <input class="form__control" type="text" name="ticket_price" value="{{ old('ticket_price', number_format($concert->ticket_price / 100, 2)) }}" placeholder="0.00">
                             </div>
                         </div>
                         <div class="form__group mg-bottom-sm {{ $errors->first('ticket_quantity', 'has-error') }}">
                             <label for="" class="form__label">Ticket Quantity</label>
-                            <input class="form__control" type="text" name="ticket_quantity" value="{{ old('ticket_quantity') }}" placeholder="250">
+                            <input class="form__control" type="text" name="ticket_quantity" value="{{ old('ticket_quantity', $concert->ticket_quantity) }}" placeholder="250">
                         </div>
-                    </div>
-                    <div class="form__group mg-bottom-sm {{ $errors->first('poster_image', 'has-error') }}">
-                        <label for="" class="form__label">Concert Poster</label>
-                        <input class="form__control" type="file" name="poster_image" accept="image/*">
                     </div>
                 </div>
             </div>
         </div>
         <div class="container clearfix">
-            <button type="submit" class="btn btn--right btn--normal">Add Concert</button>
+            <button type="submit" class="btn btn--right btn--normal">Update Concert</button>
         </div>
     </form>
 </div>

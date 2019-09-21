@@ -16,7 +16,8 @@ class RouteTests extends TestCase
     /** @test */
     function new()
     {
-        $this->get('/backstage/concerts/new');
+        $user = factory(User::class)->create();
+        $this->actingAs($user)->get('/backstage/concerts/new');
     }
 
     /** @test */
