@@ -30,6 +30,7 @@ class EditConcertTest extends TestCase
             'state' => 'Old state',
             'zip' => '00000',
             'ticket_price' => 2000,
+            'ticket_quantity' => 5,
         ]);
         $this->assertFalse($concert->isPublished());
 
@@ -45,6 +46,7 @@ class EditConcertTest extends TestCase
             'state' => 'New state',
             'zip' => '99999',
             'ticket_price' => '72.50',
+            'ticket_quantity' => 6,
         ]);
         
         $response->assertRedirect('/backstage/concerts');
@@ -60,5 +62,6 @@ class EditConcertTest extends TestCase
         $this->assertEquals('New state', $concert->state);
         $this->assertEquals('99999', $concert->zip);
         $this->assertEquals(7250, $concert->ticket_price);
+        $this->assertEquals(6, $concert->ticket_quantity);
     }
 }
