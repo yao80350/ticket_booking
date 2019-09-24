@@ -31,7 +31,8 @@ class DatabaseSeeder extends Seeder
             'date' => Carbon::parse('2019-12-13 8:00pm'),
             'ticket_price' => 3250,
             'additional_information' => "This concert is 19+.",
-        ])->addTickets(10);
+            'ticket_quantity' => 10,
+        ]);
 
         factory(App\Concert::class)->create([
             'user_id' => $user->id,
@@ -45,7 +46,8 @@ class DatabaseSeeder extends Seeder
             'date' => Carbon::parse('2019-10-05 7:00pm'),
             'ticket_price' => 5500,
             'additional_information' => null,
-        ])->addTickets(10);
+            'ticket_quantity' => 10,
+        ]);
 
         $order = factory(Order::class)->create([
 			'confirmation_number' => 'ORDERCONFIRMATION1234',

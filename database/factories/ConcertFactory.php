@@ -20,7 +20,8 @@ $factory->define(App\Concert::class, function (Faker $faker) {
         'city' => 'New York',
         'state' => 'NY',
         'zip' => '15780',
-        'additional_information' => 'For more info, call (1)555-555'
+        'additional_information' => 'For more info, call (1)555-555',
+        'ticket_quantity' => 5,
     ];
 });
 

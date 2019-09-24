@@ -47,7 +47,7 @@ class PurchaseTicketsTest extends TestCase
 
         // Arrange
         // Create a concert
-        $concert = factory(Concert::class)->states('published')->create(['ticket_price' => 3250])->addTickets(3);
+        $concert = factory(Concert::class)->states('published')->create(['ticket_price' => 3250, 'ticket_quantity' => 3]);
 
         // Act
         // Purchase concert tickets
@@ -78,7 +78,7 @@ class PurchaseTicketsTest extends TestCase
     /** @test */
     function cannot_perchase_more_tickets_than_remain()
     {
-        $concert = factory(Concert::class)->states('published')->create()->addTickets(50);
+        $concert = factory(Concert::class)->states('published')->create(['ticket_price' => 3250, 'ticket_quantity' => 50]);
 
         $this->orderTickets($concert, [
             'email' => 'cindy@example.com',
@@ -95,7 +95,7 @@ class PurchaseTicketsTest extends TestCase
     /** @test */
     function cannot_purchase_tickets_another_customer_is_already_trying_to_purchase()
     {
-        $concert = factory(Concert::class)->states('published')->create(['ticket_price' => 1200])->addTickets(3);
+        $concert = factory(Concert::class)->states('published')->create(['ticket_price' => 1200, 'ticket_quantity' => 3]);
 
         $this->paymentGateway->beforeFirstCharge(function ($paymentGateway) use ($concert) {
             $this->orderTickets($concert, [
@@ -191,7 +191,7 @@ class PurchaseTicketsTest extends TestCase
     /** @test */
     function cannot_perchase_tickets_to_an_unpublished_concert()
     {
-        $concert = factory(Concert::class)->states('unpublished')->create()->addTickets(3);
+        $concert = factory(Concert::class)->states('unpublished')->create(['ticket_quantity' => 3]);
 
         $this->orderTickets($concert, [
             'email' => 'cindy@example.com',
@@ -207,7 +207,7 @@ class PurchaseTicketsTest extends TestCase
     /** @test */
     function an_order_is_not_created_if_payment_fails()
     {
-        $concert = factory(Concert::class)->states('published')->create(['ticket_price' => 3250])->addTickets(3);
+        $concert = factory(Concert::class)->states('published')->create(['ticket_price' => 3250, 'ticket_quantity' => 3]);
 
         $this->orderTickets($concert, [
             'email' => 'cindy@example.com',
