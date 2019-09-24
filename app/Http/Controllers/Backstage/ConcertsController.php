@@ -85,7 +85,7 @@ class ConcertsController extends Controller
 
         $concert = Auth::user()->concerts()->findOrFail($id);
 
-        abort_if($concert->isPublished(), 403);
+        abort_if($concert->isPublished(), 403); 
 
         $concert->update([
             'title' => request('title'),
