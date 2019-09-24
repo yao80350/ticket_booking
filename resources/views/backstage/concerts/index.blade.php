@@ -11,7 +11,7 @@
     <section class="container">
         <h2 class="list-title">Published</h2>
         <div class="your-concerts">
-            @foreach ($concerts->filter->isPublished() as $concert)
+            @foreach ($publishedConcerts as $concert)
             <div class='concert-card mg-bottom-sm'>
                 <h3>{{ $concert->title }}</h3>
                 <p class="concert-card__subtitle">{{ $concert->subtitle }}</p>
@@ -34,7 +34,7 @@
     <section class="container">
         <h2 class="list-title">Drafts</h2>
         <div class="your-concerts">
-            @foreach ($concerts->reject->isPublished() as $concert)
+            @foreach ($unpublishedConcerts as $concert)
             <div class='concert-card mg-bottom-sm'>
                 <h3>{{ $concert->title }}</h3>
                 <p class="concert-card__subtitle">{{ $concert->subtitle }}</p>
@@ -48,7 +48,11 @@
                 </div>
                 <div>
                     <a class="btn btn--grey" href="{{ route('backstage.concerts.edit', ['id' => $concert->id]) }}">Edit</a>
-                    <a class="btn-inline" href="">Publish</a>
+                    <form class="inline-block" action="{{ route('backstage.published-concerts.store') }}" method="POST">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="concert_id" value="{{ $concert->id }}">
+                        <button type="submit" class="btn-inline">Publish</button>
+                    </form>
                 </div>
             </div>
             @endforeach
