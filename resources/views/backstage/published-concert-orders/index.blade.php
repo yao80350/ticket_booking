@@ -19,8 +19,8 @@
         <h2 class='list-title'>Overview</h2>
         <div class="progress-card">
             <div class="progress-card__section">
-                <p class="mg-bottom-sm">This show is {}% sold out</p>
-                <progress class="progress" value="142" max="255">63.11</progress>
+                <p class="mg-bottom-sm">This show is {{ $concert->percentSoldOut() }}% sold out</p>
+                <progress class="progress" value="{{ $concert->ticketsSold() }}" max="{{ $concert->totalTickets() }}">63.11</progress>
             </div>
             <div class="progress-card__list">
                 <div class="progress-card__item">
@@ -33,7 +33,7 @@
                 </div>
                 <div class="progress-card__item">
                     <h3>Total Revenue</h3>
-                    <div class="bold">{{ $concert->ticketsRemaining() }}</div>
+                    <div class="bold">${{ $concert->revenueInDollars() }}</div>
                 </div>
             </div>
         </div>
