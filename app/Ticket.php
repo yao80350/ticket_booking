@@ -21,6 +21,11 @@ class Ticket extends Model
     {
         return $this->belongsTo(Concert::class);
     }
+
+    public function scopeSold($query)
+    {
+        return $query->whereNotNull('order_id');
+    }
 	
     public function scopeAvailable($query) 
     {
