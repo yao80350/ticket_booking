@@ -1,0 +1,16 @@
+.message-card {
+    background-color: $color-white;
+    border-radius: .25rem;
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+
+    .list-title {
+        margin-top: .5rem;
+    }
+
+    .form {
+        padding: 0;
+        padding-top: 1rem;
+    }
+}
