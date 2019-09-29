@@ -52,8 +52,8 @@
                         <th>Email</th>
                         <th>Tickets</th>
                         <th>Amount</th>
-                        <th>Card</th>
-                        <th>Purchased</th>
+                        <th class="sm-hide">Card</th>
+                        <th class="sm-hide">Purchased</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,11 +62,11 @@
                         <td>{{ $order->email }}</td>
                         <td>{{ $order->ticketQuantity() }}</td>
                         <td>{{ number_format($order->amount / 100, 2) }}</td>
-                        <td>
+                        <td class="sm-hide"> 
                             <span>****</span>
                             {{ $order->card_last_four }}
                         </td>
-                        <td>{{ $order->created_at->format('M j, Y @ g:ia') }}</td>
+                        <td class="sm-hide">{{ $order->created_at->format('M j, Y, g:ia') }}</td>
                     </tr>
                     @endforeach
                 </tbody>
