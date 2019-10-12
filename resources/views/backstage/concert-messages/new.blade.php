@@ -22,7 +22,7 @@
                 <h1 class="list-title text-center">New Message</h1>
                 
                 @if(session('flash'))
-                <div class="alert alert--success">Message sent!</div>
+                <div class="alert alert--success">{{ session('flash') }}</div>
                 @endif
                 <form class="form block" action="{{ route('backstage.concert-messages.store', ['id'=> $concert->id]) }}" method="POST">
                 {{ csrf_field() }}
