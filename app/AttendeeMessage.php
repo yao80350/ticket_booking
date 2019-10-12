@@ -21,7 +21,7 @@ class AttendeeMessage extends Model
 
     public function withChunkedRecipients($chunkSize, $callback)
     {
-        return $this->orders()->chunk($chunkSize, function($orders) use ($callback) {
+        $this->orders()->chunk($chunkSize, function($orders) use ($callback) {
             $callback($orders->pluck('email'));
         });
     }

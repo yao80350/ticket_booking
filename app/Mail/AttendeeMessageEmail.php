@@ -30,6 +30,8 @@ class AttendeeMessageEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->text('emails.attendee-message-email')
+            ->subject($this->attendeeMessage->subject)
+            ->from(config("mail.username"));
     }
 }
