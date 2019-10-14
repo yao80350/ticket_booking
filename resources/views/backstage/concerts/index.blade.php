@@ -25,7 +25,7 @@
                 </div>
                 <div>
                     <a class="btn btn--grey" href="{{ route('backstage.published-concert-orders.index', ['id' => $concert->id]) }}">Manage</a>
-                    <a class="btn-inline" href="">Public Link</a>
+                    <a class="btn-inline" href="{{ route('concerts.show', $concert) }}">Public Link</a>
                 </div>
             </div>
             @endforeach
