@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backstage;
 use App\Concert;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,7 +37,8 @@ class ConcertsController extends Controller
             'state' => 'required',
             'zip' => 'required',
             'ticket_price' => 'required|numeric|min:5',
-            'ticket_quantity' => 'required|numeric|min:1'
+            'ticket_quantity' => 'required|numeric|min:1',
+            'poster_image' => ['nullable', 'image']
         ]);
 
         $concert = Auth::user()->concerts()->create([
@@ -53,7 +55,8 @@ class ConcertsController extends Controller
             'state' => request('state'),
             'zip' => request('zip'),
             'additional_information' => request('additional_information'),
-            'ticket_quantity' => (int) request('ticket_quantity')
+            'ticket_quantity' => (int) request('ticket_quantity'),
+            'poster_image_path' => request('poster_image')->store('posters', 's3')
         ]);
 
         //return $concert;
