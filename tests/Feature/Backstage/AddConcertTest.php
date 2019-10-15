@@ -6,7 +6,9 @@ use App\User;
 use App\Concert;
 use Carbon\Carbon;
 use Tests\TestCase;
+use App\Events\ConcertAdded;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -80,5 +82,33 @@ class AddConcertTest extends TestCase
 
         $concert = Concert::first();
         Storage::disk('public')->assertExists($concert->poster_image_path);
+    }
+
+    /** @test */
+    public function an_event_is_fired_when_a_concert_is_created()
+    {
+        Event::fake([ConcertAdded::class]);
+
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($user)->post('/backstage/concerts', [
+            'title' => 'No Warning',
+            'subtitle' => 'with Cruel Hand and Backtrack',
+            'additional_information' => "You must be 19 years of age to attend this concert.",
+            'date' => '2019-11-18',
+            'time' => '8:00pm',
+            'venue' => 'The Mosh Pit',
+            'venue_address' => '123 Fake St.',
+            'city' => 'Laraville',
+            'state' => 'ON',
+            'zip' => '12345',
+            'ticket_price' => '32.50',
+            'ticket_quantity' => '75',
+        ]); 
+        
+        Event::assertDispatched(ConcertAdded::class, function($event) {
+            $concert = Concert::firstOrFail();
+            return $event->concert->is($concert);
+        });
     }
 }
