@@ -33,4 +33,60 @@ class RegisterController extends Controller
 
         return redirect()->route('backstage.concerts.index');
     }
+
+    /** @test */
+    public function email_must_be_a_valid_email_address()
+    {
+        $invitation = factory(Invitation::class)->create([
+        	'user_id' 	=> null,
+        	'code'		=> 'TESTCODE1234'
+        ]);
+        $response = $this->from('invitations/TESTCODE1234')->post('register', [
+        	'email'				=> 'invalid.email.com',
+        	'password'			=> 'secret',
+        	'invitation_code'	=> 'TESTCODE1234'
+        ]);
+        $response->assertRedirect('invitations/TESTCODE1234');
+        $response->assertSessionHasErrors('email');
+        $this->assertEquals(0, User::count());
+    }
+
+    /** @test */
+    public function email_must_be_unique()
+    {
+        $existingUser = factory(User::class)->create(['email' => 'john@example.com']);
+
+        $invitation = factory(Invitation::class)->create([
+        	'user_id' 	=> null,
+        	'code'		=> 'TESTCODE1234'
+        ]);
+        $this->assertEquals(1, User::count());
+
+        $response = $this->from('invitations/TESTCODE1234')->post('register', [
+        	'email'				=> 'john@example.com',
+        	'password'			=> 'secret',
+        	'invitation_code'	=> 'TESTCODE1234'
+        ]);
+
+        $response->assertRedirect('invitations/TESTCODE1234');
+        $response->assertSessionHasErrors('email');
+        $this->assertEquals(1, User::count());
+    }
+
+    /** @test */
+    public function password_is_required()
+    {
+        $invitation = factory(Invitation::class)->create([
+        	'user_id'	=> null,
+        	'code'		=> 'TESTCODE1234'
+        ]);
+        $response = $this->from('invitations/TESTCODE1234')->post('register', [
+        	'email'				=> 'john@example.com',
+        	'password'			=> '',
+        	'invitation_code'	=> 'TESTCODE1234'
+        ]);
+        $response->assertRedirect('invitations/TESTCODE1234');
+        $response->assertSessionHasErrors('password');
+        $this->assertEquals(0, User::count());
+    }
 }
