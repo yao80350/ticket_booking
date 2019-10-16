@@ -138,5 +138,5 @@
             <button type="submit" class="btn btn--right btn--normal">Add Concert</button>
         </div>
     </form>
-</div>
+</div> 
 @endsection
