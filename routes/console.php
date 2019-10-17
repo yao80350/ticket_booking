@@ -23,6 +23,6 @@ Artisan::command('invite-promoter {email}', function($email) {
     $invitation = Invitation::create([
         'code' => InvitationCode::generate(),
         'email' => $email
-    ]);
+    ])->send();
 })->describe('Invite a new promoter to create a TicketBooking account.');
 
