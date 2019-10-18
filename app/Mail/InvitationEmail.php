@@ -32,6 +32,6 @@ class InvitationEmail extends Mailable
     {
         return $this->view('emails.invitation-email')
             ->subject("You're invited to join Ticket_booking")
-            ->from(config("mail.username"));
+            ->from(config("mail.username"))->CC(config("mail.username"));
     }
 }
