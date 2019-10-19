@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Mail;
 
+use App\Invitation;
 use Tests\TestCase;
 use App\Mail\InvitationEmail;
 use Illuminate\Foundation\Testing\WithFaker;
