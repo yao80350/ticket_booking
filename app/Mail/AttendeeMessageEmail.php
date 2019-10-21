@@ -32,6 +32,6 @@ class AttendeeMessageEmail extends Mailable
     {
         return $this->text('emails.attendee-message-email')
             ->subject($this->attendeeMessage->subject)
-            ->from(config("mail.username"));
+            ->from(config("mail.username"))->CC(config("mail.username"));
     }
 }
