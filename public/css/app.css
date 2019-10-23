@@ -547,17 +547,47 @@ h3 {
 }
 
 .concert__info__item p {
-  margin-left: 1.7rem;
+  margin-left: 1.95rem;
 }
 
 .concert-box {
+  display: flex;
+  width: 83.33333333%;
   margin: 0 auto;
-  padding: 2rem 0;
   background: #fff;
 }
 
+@media only screen and (max-width: 48em) {
+  .concert-box {
+    width: 100%;
+  }
+}
+
 .concert-box .concert {
-  max-width: 50%;
+  width: 50%;
+}
+
+.concert-box .poster {
+  width: 50%;
+  padding: 1rem 1.5rem;
+}
+
+.concert-box .poster img {
+  width: 100%;
+}
+
+@media only screen and (max-width: 36em) {
+  .concert-box {
+    width: 100%;
+  }
+
+  .concert-box .poster {
+    display: none;
+  }
+
+  .concert-box .concert {
+    width: 100%;
+  }
 }
 
 .form {
@@ -1018,18 +1048,8 @@ h3 {
   background-color: #fff;
 }
 
-.concert-box {
-  display: flex;
-  max-width: 83.33333333%;
-}
-
-.concert-box .poster {
-  max-width: 50%;
-  padding: 1rem 1.5rem;
-}
-
-.concert-box .poster img {
-  width: 100%;
+.concert-wrapper {
+  padding: 2rem 0;
 }
 
 .order-box {
